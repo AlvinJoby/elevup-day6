@@ -65,6 +65,9 @@ const DEMO_MOVIES = [
 function loadLS(key, def) {
   try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
 }
+function checkApiKey() {
+  document.getElementById('apiNotice').hidden = true;
+}
 function saveLS(key, val) {
   try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
 }
