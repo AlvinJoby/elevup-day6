@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineVault — Discover Great Films</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+</head>
+<body class="dark-mode" data-theme="dark">
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="CineVault home">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">CineVault</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
+        <li><a href="#" class="nav-link" data-section="trending">Trending</a></li>
+        <li><a href="#" class="nav-link" data-section="toprated">Top Rated</a></li>
+        <li><a href="#" class="nav-link" data-section="genres">Genres</a></li>
+        <li><a href="#" class="nav-link" data-section="favorites">Favorites</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-icon">☽</span>
+        </button>
+        <button class="icon-btn" id="navSearchBtn" aria-label="Open search">
+          <span>⌕</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#" class="nav-link" data-section="home">Home</a>
+    <a href="#" class="nav-link" data-section="trending">Trending</a>
+    <a href="#" class="nav-link" data-section="toprated">Top Rated</a>
+    <a href="#" class="nav-link" data-section="genres">Genres</a>
+    <a href="#" class="nav-link" data-section="favorites">Favorites</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="Featured movie">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content" id="heroContent">
+      <div class="hero-badge">Featured Today</div>
+      <h1 class="hero-title" id="heroTitle">Discover Your Next<br/><em>Favourite Film</em></h1>
+      <p class="hero-tagline" id="heroTagline">A universe of cinema, curated for you.</p>
+      <div class="hero-search-wrap">
+        <div class="search-box" role="search">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search movies, directors, genres…" autocomplete="off" aria-label="Search movies" aria-autocomplete="list" aria-controls="searchSuggestions" />
+          <button class="search-clear" id="searchClear" aria-label="Clear search" hidden>✕</button>
+          <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Search suggestions"></div>
+        </div>
+        <button class="btn-primary" id="exploreBtn">Explore Now</button>
+      </div>
+      <div class="hero-meta" id="heroMeta"></div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main id="mainContent">
+
+    <!-- STATS DASHBOARD -->
+    <section class="stats-section" id="statsSection" aria-label="Statistics">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="statMovies">0</div>
+            <div class="stat-label">Movies Loaded</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="statFavs">0</div>
+            <div class="stat-label">Favourites</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="statWatchlist">0</div>
+            <div class="stat-label">Watchlist</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="statTopRated">—</div>
+            <div class="stat-label">Top Rated</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTERS BAR -->
+    <section class="filters-section" id="filtersSection" aria-label="Filters">
+      <div class="container">
+        <div class="filters-bar">
+          <div class="filter-group">
+            <label class="filter-label" for="genreFilter">Genre</label>
+            <select id="genreFilter" class="filter-select" aria-label="Filter by genre">
+              <option value="">All Genres</option>
+              <option value="28">Action</option>
+              <option value="12">Adventure</option>
+              <option value="16">Animation</option>
+              <option value="35">Comedy</option>
+              <option value="80">Crime</option>
+              <option value="18">Drama</option>
+              <option value="14">Fantasy</option>
+              <option value="27">Horror</option>
+              <option value="10749">Romance</option>
+              <option value="878">Sci-Fi</option>
+              <option value="53">Thriller</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="yearFilter">Year</label>
+            <select id="yearFilter" class="filter-select" aria-label="Filter by year">
+              <option value="">Any Year</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="ratingFilter">Min Rating</label>
+            <select id="ratingFilter" class="filter-select" aria-label="Filter by rating">
+              <option value="">Any</option>
+              <option value="9">9+</option>
+              <option value="8">8+</option>
+              <option value="7">7+</option>
+              <option value="6">6+</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="sortFilter">Sort By</label>
+            <select id="sortFilter" class="filter-select" aria-label="Sort movies">
+              <option value="popularity.desc">Most Popular</option>
+              <option value="vote_average.desc">Highest Rated</option>
+              <option value="release_date.desc">Newest</option>
+              <option value="release_date.asc">Oldest</option>
+              <option value="title.asc">A–Z</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="langFilter">Language</label>
+            <select id="langFilter" class="filter-select" aria-label="Filter by language">
+              <option value="">Any</option>
+              <option value="en">English</option>
+              <option value="fr">French</option>
+              <option value="ja">Japanese</option>
+              <option value="ko">Korean</option>
+              <option value="es">Spanish</option>
+              <option value="de">German</option>
+              <option value="hi">Hindi</option>
+            </select>
+          </div>
+          <button class="btn-ghost" id="resetFilters">Reset</button>
+        </div>
+
+        <!-- GENRE PILLS -->
+        <div class="genre-pills" id="genrePills" role="list" aria-label="Genre quick filters">
+          <button class="genre-pill active" data-genre="" role="listitem">All</button>
+          <button class="genre-pill" data-genre="28" role="listitem">Action</button>
+          <button class="genre-pill" data-genre="12" role="listitem">Adventure</button>
+          <button class="genre-pill" data-genre="16" role="listitem">Animation</button>
+          <button class="genre-pill" data-genre="35" role="listitem">Comedy</button>
+          <button class="genre-pill" data-genre="18" role="listitem">Drama</button>
+          <button class="genre-pill" data-genre="27" role="listitem">Horror</button>
+          <button class="genre-pill" data-genre="10749" role="listitem">Romance</button>
+          <button class="genre-pill" data-genre="878" role="listitem">Sci-Fi</button>
+          <button class="genre-pill" data-genre="53" role="listitem">Thriller</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEARCH RESULTS -->
+    <section class="section" id="searchResultsSection" hidden aria-label="Search results">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" id="searchResultsTitle">Results</h2>
+          <button class="btn-ghost" id="clearSearch">Clear</button>
+        </div>
+        <div class="movie-grid" id="searchResultsGrid"></div>
+        <div class="empty-state" id="searchEmpty" hidden>
+          <div class="empty-icon">🎬</div>
+          <h3>No films found</h3>
+          <p>Try different keywords or browse categories below.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENTLY VIEWED -->
+    <section class="section" id="recentSection" hidden aria-label="Recently viewed">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Recently Viewed</h2>
+          <button class="btn-ghost" id="clearRecent">Clear</button>
+        </div>
+        <div class="movie-grid" id="recentGrid"></div>
+      </div>
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+    <section class="section" id="recsSection" hidden aria-label="Recommended for you">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Recommended For You</h2>
+          <span class="section-sub">Based on your favourites</span>
+        </div>
+        <div class="movie-grid" id="recsGrid"></div>
+      </div>
+    </section>
+
+    <!-- FAVORITES -->
+    <section class="section" id="favoritesSection" hidden aria-label="Your favourites">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Your Favourites</h2>
+          <span class="section-sub" id="favsCount">0 films</span>
+        </div>
+        <div class="movie-grid" id="favoritesGrid"></div>
+        <div class="empty-state" id="favsEmpty" hidden>
+          <div class="empty-icon">♡</div>
+          <h3>No favourites yet</h3>
+          <p>Tap the heart on any movie card to save it here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WATCHLIST -->
+    <section class="section" id="watchlistSection" hidden aria-label="Your watchlist">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Watchlist</h2>
+          <span class="section-sub" id="watchlistCount">0 films</span>
+        </div>
+        <div class="movie-grid" id="watchlistGrid"></div>
+        <div class="empty-state" id="watchlistEmpty" hidden>
+          <div class="empty-icon">🕐</div>
+          <h3>Your watchlist is empty</h3>
+          <p>Add movies to watch later from any card.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DYNAMIC MOVIE SECTIONS -->
+    <section class="section" id="trendingSection" aria-label="Trending movies">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title"><span class="section-accent">↑</span> Trending Now</h2>
+          <a href="#" class="see-all" data-load="trending">See all</a>
+        </div>
+        <div class="movie-grid skeleton-grid" id="trendingGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="popularSection" aria-label="Popular movies">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Popular Films</h2>
+          <a href="#" class="see-all" data-load="popular">See all</a>
+        </div>
+        <div class="movie-grid skeleton-grid" id="popularGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="topratedSection" aria-label="Top rated movies">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Top Rated</h2>
+          <a href="#" class="see-all" data-load="top_rated">See all</a>
+        </div>
+        <div class="movie-grid skeleton-grid" id="topratedGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="upcomingSection" aria-label="Upcoming movies">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Coming Soon</h2>
+          <a href="#" class="see-all" data-load="upcoming">See all</a>
+        </div>
+        <div class="movie-grid skeleton-grid" id="upcomingGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="nowplayingSection" aria-label="Now playing">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">In Cinemas</h2>
+          <a href="#" class="see-all" data-load="now_playing">See all</a>
+        </div>
+        <div class="movie-grid skeleton-grid" id="nowplayingGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MOVIE DETAIL MODAL -->
+  <div class="modal-overlay" id="movieModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-container">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-backdrop-overlay"></div>
+      <div class="modal-body">
+        <div class="modal-poster-wrap">
+          <img class="modal-poster" id="modalPoster" src="" alt="" loading="lazy" />
+          <div class="modal-actions">
+            <button class="modal-action-btn" id="modalFavBtn" aria-label="Toggle favourite">
+              <span class="action-icon">♡</span> Favourite
+            </button>
+            <button class="modal-action-btn" id="modalWatchBtn" aria-label="Toggle watchlist">
+              <span class="action-icon">+</span> Watchlist
+            </button>
+            <button class="modal-action-btn accent" id="modalTrailerBtn" aria-label="Watch trailer">
+              <span class="action-icon">▶</span> Trailer
+            </button>
+          </div>
+        </div>
+        <div class="modal-info">
+          <div class="modal-badges" id="modalBadges"></div>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <p class="modal-tagline" id="modalTagline"></p>
+          <div class="modal-meta" id="modalMeta"></div>
+          <div class="modal-rating-bar" id="modalRatingBar"></div>
+          <p class="modal-overview" id="modalOverview"></p>
+          <div class="modal-cast" id="modalCast"></div>
+          <div class="modal-facts" id="modalFacts"></div>
+          <div class="modal-companies" id="modalCompanies"></div>
+        </div>
+      </div>
+      <div class="modal-similar" id="modalSimilar">
+        <h3 class="similar-title">You Might Also Like</h3>
+        <div class="similar-grid" id="similarGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAILER MODAL -->
+  <div class="trailer-overlay" id="trailerModal" role="dialog" aria-modal="true" aria-label="Movie trailer" aria-hidden="true">
+    <div class="trailer-container">
+      <button class="modal-close" id="trailerClose" aria-label="Close trailer">✕</button>
+      <div class="trailer-embed" id="trailerEmbed"></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top" hidden>↑</button>
+
+  <!-- API MISSING NOTICE -->
+  <div class="api-notice" id="apiNotice" hidden>
+    <div class="api-notice-inner">
+      <h3>🔑 API Key Required</h3>
+      <p>To use live data, add your <strong>TMDb API key</strong> to <code>script.js</code> at the top of the file.</p>
+      <p>Get a free key at <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener">themoviedb.org</a></p>
+      <button class="btn-primary" id="dismissNotice">Use Demo Data</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
