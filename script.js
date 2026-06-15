@@ -92,7 +92,7 @@ function genreName(id) { return GENRE_MAP[id] || ''; }
 
 /* ─── API ───────────────────────────────────────────────── */
 async function api(path, params = {}) {
-  if (!CONFIG.API_KEY || CONFIG.API_KEY === 'YOUR_TMDB_API_KEY_HERE') {
+  if (!CONFIG.API_KEY || CONFIG.API_KEY === 'a483a00e0aaaec8d41e65a9befab0845') {
     throw new Error('NO_KEY');
   }
   const url = new URL(`${CONFIG.BASE_URL}${path}`);
